@@ -11,7 +11,7 @@
 	- PLACEHOLDER
   - PLACEHOLDER
 
-- Emory Walsh
+- Emory Walsh -- Project Manager
 	- PLACEHOLDER
 	- PLACEHOLDER
   - PLACEHOLDER
