@@ -1,3 +1,7 @@
 Project 0 DEVLOG
 
 firstL -- 2019-10-
+
+emoryW -- 2019-10-18 8:31
+  -added noobpedia's submodule, created devlog file and added to README
+  - starting our design doc
