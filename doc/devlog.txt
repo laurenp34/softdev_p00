@@ -6,7 +6,7 @@ emoryW -- 2019-10-18 8:31
   -added noobpedia's submodule, created devlog file and added to README
   -starting our design doc
 
-emoryW == 2019-10-20 15:45
+emoryW -- 2019-10-20 15:45
   -Kevin working on sitemap/database layouts
   -Raymond working on component map
   -Emory working on component descriptions/database layouts
