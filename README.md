@@ -8,7 +8,7 @@
 
 - Kevin Li
 	- Implementing routes
-		- PLGetting and processing form data
+		- Getting and processing form data
 		- Login/registration process
 		- Link pages to one another via hyperlinks and whatnot
 		- Flashing necessary messages
