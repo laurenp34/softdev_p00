@@ -14,3 +14,7 @@ emoryW -- 2019-10-20 15:45
   -Kevin working on sitemap/database layouts
   -Raymond working on component map
   -Emory working on component descriptions/database layouts
+
+kevinL - 2019-10-20 22:35
+  - Added component map
+  - Printing out three hardcopies
