@@ -1,20 +1,25 @@
 Project 0 DEVLOG
 
 emoryW -- 2019-10-18 8:31
-  -added noobpedia's submodule, created devlog file and added to README
-  -starting our design doc
+  - Added noobpedia's submodule, created devlog file and added to README
+  - Starting our design doc
 
 kevinL -- 2019-10-19 11:39
   - Added a site map
-  
+
 kevinL -- 2019-10-20 18:35
   - Added database organization layout
 
 emoryW -- 2019-10-20 15:45
-  -Kevin working on sitemap/database layouts
-  -Raymond working on component map
-  -Emory working on component descriptions/database layouts
+  - Kevin working on sitemap/database layouts
+  - Raymond working on component map
+  - Emory working on component descriptions/database layouts
 
 kevinL - 2019-10-20 22:35
   - Added component map
   - Printing out three hardcopies
+
+emoryW - 2019-10-21 20:00
+  - New version (v1) of design doc
+    - Updated database table structure so all story updates are added to one table instead of having a separate table for each story
+    - Added that Raymond will be making the HTML templates
