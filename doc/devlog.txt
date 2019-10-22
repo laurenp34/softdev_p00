@@ -1,3 +1,8 @@
+Team Noobpedia -- Emory Walsh & Kevin Li & Raymond Lee
+SoftDev pd1
+P00 -- Da Art of Storytellin'
+2019-10-28
+
 Project 0 DEVLOG
 
 emoryW -- 2019-10-18 8:31
@@ -38,26 +43,30 @@ emoryW - 2019-10-21 21:00
       - Communicating when we have an issue. We want to be a team that instead of cutting corners and hacking out answers, we can talk to each other and come up with a better solution.
       - Before finalizing any code, we're each going to look over each other's work to make sure that everything is understandable.
       - Finally, we plan to really stress the use of comments in our code. Comments make it easier on all of us, so we know if there are any rough patches to fix or just  a small explanation to guide us.
-      
+
 kevinL - 2019-10-21 21:30
   SQLite operations
   - JOIN operations are used to query data from two or more tables.
   - INNER JOIN
     - Matches every row from one table with every row from another table where the join condition specified after the ON keyword is true (using foreign keys).
-    - For our purposes: both the StoryTitles and StoryUpdates table have a "Title" column. The latter doesn't track the creator of a story. We can remedy that by matching rows that have the same title between the two tables, then combine them together. Then we get a single "set" that has the creator column in addition to the columns already present in the StoryUpdates table. 
+    - For our purposes: both the StoryTitles and StoryUpdates table have a "Title" column. The latter doesn't track the creator of a story. We can remedy that by matching rows that have the same title between the two tables, then combine them together. Then we get a single "set" that has the creator column in addition to the columns already present in the StoryUpdates table.
   - LEFT JOIN
-    - Same as INNER JOIN except every single row from the "left" table is included. If no rows from the "right" table being joined to the left table matches (via the join condition), NULL is in place of the row. 
+    - Same as INNER JOIN except every single row from the "left" table is included. If no rows from the "right" table being joined to the left table matches (via the join condition), NULL is in place of the row.
     - This means that you can specifically find rows that don't match by adding a WHERE clause: WHERE (column) is NULL.
     - This should only be useful if we allow users to submit nothing to forms (e.g. not having a password, not submitting any text when creating or updating a story, etc.)
   - CROSS JOIN
     - Does not use a join condition
-    - Combines every row from the first table with every row from the second table to form the result set. 
-    - If the first table has N rows, the second table has M rows, the final result has N x M rows. 
+    - Combines every row from the first table with every row from the second table to form the result set.
+    - If the first table has N rows, the second table has M rows, the final result has N x M rows.
     - Basically makes every combination possible out of the columns of the selected tables.
-    - Don't see how this would be useful for our project. 
- 
+    - Don't see how this would be useful for our project.
+
 rayL - 2019-10-22 00:12
   -JOIN operations
     -can be used to structure data more efficiently for different uses. ex: merging the storyTitles and storyUpdates tables to show the activity of a user: the stories they have created and the stories they edited; as opposed to merging both tables based on the title of the story and creating a list of users that have interacted with the story. The first option centers the story interaction data around the user and the second centers the users' data around the stories they interact with.
   -CROSS JOIN
     -can be used to create a copy of a newly posted story for each user, so they can edit their own "version" of the story separate from other users. The table would increase by n rows each time a story is created, for n users in the database.
+
+emoryW - 2019-10-22 8:29
+  - Wrote script that initializes the databse
+  - Added a base app.py file to add to
