@@ -23,3 +23,9 @@ emoryW - 2019-10-21 20:00
   - New version (v1) of design doc
     - Updated database table structure so all story updates are added to one table instead of having a separate table for each story
     - Added that Raymond will be making the HTML templates
+
+kevinL - 2019-10-21 20:31
+  - Changes to design doc
+    - Removed establishing a session during registration - don't want that
+    - Handle the case where a title is invalid so you don't lose all the text you had
+    - Specify that story edits show up on a user's homepage
