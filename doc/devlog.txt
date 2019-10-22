@@ -29,3 +29,12 @@ kevinL - 2019-10-21 20:31
     - Removed establishing a session during registration - don't want that
     - Handle the case where a title is invalid so you don't lose all the text you had
     - Specify that story edits show up on a user's homepage
+
+emoryW - 2019-10-21 21:00
+  - Wow that's an intense article. It shows how the world of CS really can be crazy.
+  - Everyone just does what they can to get by and says they'll go back and fix it later.
+  - I think that it's necessary to have other hobbies if you want to get into this world so you don't drive yourself crazy.
+  - Our team has a few protocols/procedures that we plan to follow so we make our time together as easy and stressless as possible.
+      - Communicating when we have an issue. We want to be a team that instead of cutting corners and hacking out answers, we can talk to each other and come up with a better solution.
+      - Before finalizing any code, we're each going to look over each other's work to make sure that everything is understandable.
+      - Finally, we plan to really stress the use of comments in our code. Comments make it easier on all of us, so we know if there are any rough patches to fix or just  a small explanation to guide us.
