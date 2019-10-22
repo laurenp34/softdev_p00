@@ -70,3 +70,6 @@ rayL - 2019-10-22 00:12
 emoryW - 2019-10-22 8:29
   - Wrote script that initializes the databse
   - Added a base app.py file to add to
+
+kevinL - 2019-10-22 8:29
+  - Added a static help page
