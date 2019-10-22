@@ -55,3 +55,9 @@ kevinL - 2019-10-21 21:30
     - If the first table has N rows, the second table has M rows, the final result has N x M rows. 
     - Basically makes every combination possible out of the columns of the selected tables.
     - Don't see how this would be useful for our project. 
+ 
+rayL - 2019-10-22 00:12
+  -JOIN operations
+    -can be used to structure data more efficiently for different uses. ex: merging the storyTitles and storyUpdates tables to show the activity of a user: the stories they have created and the stories they edited; as opposed to merging both tables based on the title of the story and creating a list of users that have interacted with the story. The first option centers the story interaction data around the user and the second centers the users' data around the stories they interact with.
+  -CROSS JOIN
+    -can be used to create a copy of a newly posted story for each user, so they can edit their own "version" of the story separate from other users. The table would increase by n rows each time a story is created, for n users in the database.
