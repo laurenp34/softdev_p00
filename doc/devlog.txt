@@ -68,8 +68,13 @@ rayL - 2019-10-22 00:12
     -can be used to create a copy of a newly posted story for each user, so they can edit their own "version" of the story separate from other users. The table would increase by n rows each time a story is created, for n users in the database.
 
 emoryW - 2019-10-22 8:29
-  - Wrote script that initializes the databse
+  - Wrote script that initializes the database
   - Added a base app.py file to add to
 
 kevinL - 2019-10-22 8:29
   - Added a static help page
+
+emoryW - 2019-10-22 21:51
+  - Made a utl folder
+  - Moved db_builder into utl
+  - Wrote functions that add entries to database tables
