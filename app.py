@@ -20,6 +20,14 @@ else: #not adding the secret key file, so generate one on the spot for ppl witho
 
 file.close()
 
+@app.route("/")
+def home():
+    if (session.get('user')): #checks that a user is logged into a session, render welcome page
+        print("Session username: " + session['user'])
+        return "You are currently logged in!"
+
+    return render_template("login.html"); #if not, then render login page
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
