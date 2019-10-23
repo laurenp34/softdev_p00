@@ -28,6 +28,10 @@ def home():
 
     return render_template("login.html"); #if not, then render login page
 
+@app.route("/signup")
+def register():
+    return render_template("register.html")
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

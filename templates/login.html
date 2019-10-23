@@ -9,7 +9,11 @@
       {{ each }}
     {% endfor %}
 
+    <a href=/static/help.html>Help/FAQ</a>
+    <p>(Just gonna stick this here for the time being)</p>
+
     {% block form %}
+    <h3>Sign in to access this website</h3>
       <form action="/auth" method="post"> <!-- POST b/c arguments in the address bar is a bad idea -->
         Username: <input type="text" name="user">
         <br>
@@ -20,6 +24,11 @@
         <br>
         <input type="submit" values="Submit">
         <br>
+        <br>
+    {% endblock %}
+
+    {% block registerbutton %}
+      <a href=/signup>Don't have an account? Create one now.</a>
     {% endblock %}
 
     <h4>&copy; Team Noobpedia, consisting of Raymond Lee, Kevin Li, and Emory Walsh. Because we are noobs.</h4>
