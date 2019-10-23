@@ -5,6 +5,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for, session
 import os #for generating a secret key
+from utl import db_ops
 
 app = Flask(__name__)
 
@@ -26,11 +27,22 @@ def home():
         print("Session username: " + session['user'])
         return "You are currently logged in!"
 
-    return render_template("login.html"); #if not, then render login page
+    return render_template("login.html") #if not, then render login page
 
 @app.route("/signup")
-def register():
+def signup():
     return render_template("register.html")
+
+@app.route("/register", methods=['POST'])
+def register():
+    username = request.form.get('user')
+    password = request.form.get('pw')
+
+    if (db_ops.accountExists(username)):
+        return "This username is already in use. Try another one."
+
+    db_ops.addAccount(username, password)
+    return "Success!"
 
 if __name__ == "__main__":
     app.debug = True
