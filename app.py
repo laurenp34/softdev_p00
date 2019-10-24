@@ -53,8 +53,7 @@ def register():
 def newStory():
     if (session.get('user')): #checks that a user is logged into a session, render new story page
         return render_template("newstory.html")
-    return render_template("newstory.html") # delete line below when there is a method to check logins
-    #return render_template("newstory.html", error="Please log in first to create a new story.") # to check if user has logged in before letting them create a new story
+    return render_template("newstory.html", error="Please log in first to create a new story.") # to check if user has logged in before letting them create a new story
 
 @app.route("/auth", methods=['POST'])
 def login():
@@ -66,7 +65,7 @@ def login():
             return redirect(url_for('checkLogin'))
 
     if (db_ops.authenticate(username, password)):
-        return "You are logged in!"
+        return render_template("welcome.html")
 
     return "Incorrect username or password."
 
