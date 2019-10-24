@@ -25,3 +25,27 @@
 		- Create each table
 		-	Creating modules that add to
   	- Accessing information from each database table
+
+## Instructions for running this project
+
+**Dependencies**
+
+You must install the Python module called "flask". If you don't, install it in a Terminal with:
+```bash
+pip3 install flask
+```
+Note that on certain systems (like the school computers), the pip3 command may be restricted. To get around this, create a virtual environment with:
+```bash
+python3 -m venv <name_of_venv>
+```
+*Note that if your system only has Python 3 installed, just remove the 3 from the above command.*
+
+To activate the virtual environment, cd into the directory you created the environment in, and run the "activate" file. Now, you should be able to pip3 install and run Python files that utilize modules installed via pip3. To deactivate the environment, run the "deactivate" file.  
+
+**Run the program**
+
+After procuring the ability to run flask module commands, all you need to do to run the program is to type into a Terminal: 
+```bash
+python3 app.py
+```
+*Again, remove the 3 after the "python" if necessary.*

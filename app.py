@@ -56,19 +56,21 @@ def newStory():
     return render_template("newstory.html") # delete line below when there is a method to check logins
     #return render_template("newstory.html", error="Please log in first to create a new story.") # to check if user has logged in before letting them create a new story
 
-@app.route('/auth', methods=['GET', 'POST'])
-def checkLogin():
-    if request.method == "POST":
-        username = request.args['username']
-        password = request.args['password']
+@app.route("/auth", methods=['POST'])
+def login():
+    username = request.form.get('user')
+    password = request.form.get('pw')
 
-        if not (username and password):
+    if not (username and password):
             flash("Username or Password cannot be empty.")
             return redirect(url_for('checkLogin'))
 
-        # if db_ops.checkLogin:
-        #     return render_template("welcome.html")
+    if (db_ops.authenticate(username, password)):
+        return "You are logged in!"
+
+    return "Incorrect username or password."
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
