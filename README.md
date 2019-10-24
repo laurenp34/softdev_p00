@@ -44,7 +44,7 @@ To activate the virtual environment, cd into the directory you created the envir
 
 **Run the program**
 
-After procuring the ability to run flask module commands, all you need to do is to run the program is to type into a Terminal: 
+After procuring the ability to run flask module commands, all you need to do to run the program is to type into a Terminal: 
 ```bash
 python3 app.py
 ```
