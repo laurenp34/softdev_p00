@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Create New Story</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <!-- conditional below must work with method that checks login -->
+    {% if error %} 
+        <h1> {{ error }} </h1>
+    {% endif %}
+
+    <!-- should be action for form later -->
+    <form>
+        Story Title:
+        <br>
+        <input name="title" type="text">
+        <br><br>
+        Story content:
+        <br>
+        <textarea name="storycontent" rows="10" cols="100%"></textarea>
+        <br><br>
+        <input type="submit">
+    </form>
+</body>
+</html>
