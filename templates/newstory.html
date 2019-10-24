@@ -10,8 +10,8 @@
     <!-- conditional below must work with method that checks login -->
     {% if error %} 
         <h1> {{ error }} </h1>
-    {% endif %}
-
+    
+    {% else %}
     <!-- should be action for form later -->
     <form>
         Story Title:
@@ -24,5 +24,6 @@
         <br><br>
         <input type="submit">
     </form>
+    {% endif %}
 </body>
 </html>
