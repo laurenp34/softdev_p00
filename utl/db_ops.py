@@ -42,3 +42,31 @@ def addAccount(user, pw):
 
     db.commit() #save changes
     db.close()  #close database
+
+
+def addStory(title, creator):
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor()               #facilitate db ops
+
+    #==========================================================
+
+    c.execute("INSERT INTO stories VALUES (?, ?)", (title, creator))
+
+    #==========================================================
+
+    db.commit() #save changes
+    db.close()  #close database
+
+
+def addStoryUpdate(title, textUpdate, user):
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor()               #facilitate db ops
+
+    #==========================================================
+
+    c.execute("INSERT INTO storyUpdates VALUES (?, ?, ?)", (title, textUpdate, user))
+
+    #==========================================================
+
+    db.commit() #save changes
+    db.close()  #close database
