@@ -15,8 +15,8 @@ create_accounts_table = """ CREATE TABLE IF NOT EXISTS accounts (
 
 c.execute(create_accounts_table)
 
-def addAccount(user, pass):
-    insert_account = str.format("INSERT INTO accounts VALUES ('{}', '{}');", user, pass)
+def addAccount(user, password):
+    insert_account = str.format("INSERT INTO accounts VALUES ('{}', '{}');", user, password)
     c.execute(insert_account)
 
 
