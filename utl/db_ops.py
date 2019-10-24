@@ -59,9 +59,9 @@ def authenticate(user, pw):
     for row in c:
         rowCount += 1
         if (rowCount != 1):
-            return false;
+            return False
 
-        return pw == row[1];
+        return pw == row[1]
 
 def addStory(title, creator):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
