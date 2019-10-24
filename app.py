@@ -44,6 +44,17 @@ def register():
     db_ops.addAccount(username, password)
     return "Success!"
 
+@app.route("/auth", methods=['POST'])
+def login():
+    username = request.form.get('user')
+    password = request.form.get('pw')
+
+    if (db_ops.authenticate(username, password)):
+        return "You are logged in!"
+
+    return "Incorrect username or password."
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
