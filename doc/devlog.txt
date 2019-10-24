@@ -93,3 +93,5 @@ emoryW - 2019-10-24 8:41
   - Worked on db operations
   - Added the other two tables
   
+kevinL - 2019-10-24 16:30
+  - Created instructions for running the project
