@@ -95,3 +95,10 @@ emoryW - 2019-10-24 8:41
   
 kevinL - 2019-10-24 16:30
   - Created instructions for running the project
+
+rayL - 2019-10-24 19:00
+  - changed pass parameter in addAccount to password (in db_ops.py)
+  - added a newstory route to the app.py
+  - added a welcome page template
+  - added a new story page template (checks for user login)
+    - user not allowed to create a new story if they are not logged in, but for the purposes of development, comment out conditional that checks for user in session in order to see the new story template w/o restrictions
