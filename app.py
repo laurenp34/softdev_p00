@@ -3,7 +3,7 @@
 #P00 -- Da Art of Storytellin'
 #2019-10-28
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os #for generating a secret key
 from utl import db_ops
 
@@ -23,9 +23,9 @@ file.close()
 
 @app.route("/")
 def home():
-    if (session.get('user')): #checks that a user is logged into a session, render welcome page
+    if 'user' in session: #checks that a user is logged into a session, render welcome page
         print("Session username: " + session['user'])
-        return "You are currently logged in!"
+        return render_template("welcome.html")
 
     return render_template("login.html") #if not, then render login page
 
@@ -38,11 +38,36 @@ def register():
     username = request.form.get('user')
     password = request.form.get('pw')
 
+    # keep working on this
+    # if not (username and password): 
+    #     flash("Username or Password cannot be empty.")
+    #     return redirect(url_for('register'))
+
     if (db_ops.accountExists(username)):
         return "This username is already in use. Try another one."
 
     db_ops.addAccount(username, password)
     return "Success!"
+
+@app.route("/newstory", methods=['GET', 'POST'])
+def newStory():
+    if (session.get('user')): #checks that a user is logged into a session, render new story page
+        return render_template("newstory.html")
+    return render_template("newstory.html") # delete line below when there is a method to check logins
+    #return render_template("newstory.html", error="Please log in first to create a new story.") # to check if user has logged in before letting them create a new story
+
+@app.route('/auth', methods=['GET', 'POST'])
+def checkLogin():
+    if request.method == "POST":
+        username = request.args['username']
+        password = request.args['password']
+
+        if not (username and password):
+            flash("Username or Password cannot be empty.")
+            return redirect(url_for('checkLogin'))
+
+        # if db_ops.checkLogin:
+        #     return render_template("welcome.html")
 
 if __name__ == "__main__":
     app.debug = True
