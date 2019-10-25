@@ -116,3 +116,4 @@ emoryW - 2019-10-25 8:30
   - Checked over recent work to look for errors
   - Made sure that database was updating correctly
   - Everything is looking good
+  - Added a 'Back to Login' button
