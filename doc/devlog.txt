@@ -119,7 +119,7 @@ emoryW - 2019-10-25 8:30
   - Added a 'Back to Login' button
 
 kevinL - 2019-10-25 08:30
-  - Laid the groundwork for accessing stories continued to on the landing page
+  - Laid the groundwork for accessing stories contributed to on the landing page
 
 kevinL - 2019-10-25 10:10
   - Using popups for the help page so you don't get redirected to the login page if you are logged in
