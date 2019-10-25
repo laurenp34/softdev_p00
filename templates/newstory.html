@@ -5,13 +5,13 @@
 {% block content %}
   <form>
       <br>
-      Story Title:
+      Story Title (max 30 characters):
       <br>
-      <input name="title" type="text">
+      <input name="title" type="text" maxlength="50" required="required">
       <br><br>
-      Story content:
+      Story content (max 1000 characters):
       <br>
-      <textarea name="storycontent" rows="10" cols="100%"></textarea>
+      <textarea name="update" rows="10" cols="100%" maxlength="1000" required="required"></textarea>
       <br><br>
       <input type="submit">
   </form>
