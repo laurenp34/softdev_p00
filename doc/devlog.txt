@@ -92,7 +92,7 @@ kevinL - 2019-10-24 08:30
 emoryW - 2019-10-24 8:41
   - Worked on db operations
   - Added the other two tables
-  
+
 kevinL - 2019-10-24 16:30
   - Created instructions for running the project
 
@@ -110,4 +110,9 @@ kevinL - 2019-10-24 22:22
   - POST everything (guys lmk if I should allow GET so that query strings are shown)
   - /create route links to Ray's new story template
   - Use jinja2 extend to minimize repetitiveness in HTML files
-  - After creating a story, it now gets added to the database. You are not allowed to create two stories of the same title. 
+  - After creating a story, it now gets added to the database. You are not allowed to create two stories of the same title.
+
+emoryW - 2019-10-25 8:30
+  - Checked over recent work to look for errors
+  - Made sure that database was updating correctly
+  - Everything is looking good
