@@ -65,9 +65,16 @@ def login():
             return redirect(url_for('checkLogin'))
 
     if (db_ops.authenticate(username, password)):
-        return render_template("welcome.html")
+        return redirect(url_for('welcome'))
 
     return "Incorrect username or password."
+    
+
+@app.route('/welcome/')
+def welcome():
+    if 'user' in session: #checks that a user is logged into a session, render new story page
+        return render_template("welcome.html")
+    return render_template("welcome.html") # MUST fix this tautology by properly querying user value in session
 
 if __name__ == "__main__":
     app.debug = True
