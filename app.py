@@ -25,10 +25,22 @@ file.close()
 def home():
     if ('user' in session): #checks that a user is logged into a session, render welcome page)
         print("Session username: " + session['user'])
-        flash ("You are currently logged in.")
+        flash ("You are logged in.")
         return render_template("welcome.html")
 
     return render_template("login.html") #if not, then render login page
+
+@app.route("/auth", methods=['POST'])
+def login():
+    username = request.form.get('user')
+    password = request.form.get('pw')
+
+    if (db_ops.authenticate(username, password)):
+        session['user'] = username
+        return redirect(url_for('home'))
+
+    flash("Failed to log in. The username or password provided did not match any accounts.");
+    return redirect(url_for('home'));
 
 @app.route("/signup")
 def signup():
@@ -50,26 +62,6 @@ def register():
     db_ops.addAccount(username, password)
     flash("You have successfully created your account. Please log in now.")
     return redirect(url_for('home'))
-
-@app.route("/newstory", methods=['GET', 'POST'])
-def newStory():
-    if (session.get('user')): #checks that a user is logged into a session, render new story page
-        return render_template("newstory.html")
-    return render_template("newstory.html") # delete line below when there is a method to check logins
-    #return render_template("newstory.html", error="Please log in first to create a new story.") # to check if user has logged in before letting them create a new story
-
-@app.route("/auth", methods=['POST'])
-def login():
-    username = request.form.get('user')
-    password = request.form.get('pw')
-
-    if (db_ops.authenticate(username, password)):
-        flash("You are logged in!")
-        session['user'] = username
-        return render_template("welcome.html"); #landing page
-
-    flash("Failed to log in. The username or password provided did not match any accounts.");
-    return redirect(url_for('home'));
 
 @app.route("/logout")
 def logout():
