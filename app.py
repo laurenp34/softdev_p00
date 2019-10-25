@@ -51,11 +51,7 @@ def register():
     username = request.form.get('user')
     password = request.form.get('pw')
 
-    if (len(username) == 0 or len(password) == 0):
-        flash("Your username or password cannot be empty.")
-        return redirect(url_for('signup'))
-
-    elif (db_ops.accountExists(username)):
+    if (db_ops.accountExists(username)):
         flash("This username is already in use. Try another one.")
         return redirect(url_for('signup'))
 
@@ -72,6 +68,14 @@ def logout():
 @app.route("/create")
 def create():
     return render_template("newstory.html")
+
+@app.route("/addstory", methods=['POST'])
+def addStory():
+    title = request.form.get('title')
+    content = request.form.get('update')
+
+
+    return "PLACEHOLDER"
 
 if __name__ == "__main__":
     app.debug = True

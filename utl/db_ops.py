@@ -18,14 +18,12 @@ def accountExists(user):
     for row in c:
         rowCount += 1
 
-    print(rowCount)
-
     #==========================================================
 
     db.commit() #save changes
     db.close()  #close database
 
-    if (rowCount > 0):
+    if (rowCount == 1):
         return True
 
     return False
@@ -62,6 +60,32 @@ def authenticate(user, pw):
             return false;
 
         return pw == row[1];
+
+def storyExists(title):
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor()               #facilitate db ops
+
+    #==========================================================
+
+    c.execute(
+    """
+        SELECT * FROM stories WHERE title = (?)
+    """, (title,)
+    )
+
+    rowCount = 0
+    for row in c:
+        rowCount += 1
+
+    #==========================================================
+
+    db.commit() #save changes
+    db.close()  #close database
+
+    if (rowCount == 1):
+        return True
+
+    return False
 
 def addStory(title, creator):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
