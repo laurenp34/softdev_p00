@@ -48,7 +48,7 @@ def authenticate(user, pw):
     c = db.cursor()               #facilitate db ops
 
     #==========================================================
-    
+
     c.execute(
     """
         SELECT * FROM accounts WHERE username = (?)
