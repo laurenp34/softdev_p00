@@ -123,3 +123,6 @@ kevinL - 2019-10-25 08:30
 
 kevinL - 2019-10-25 10:10
   - Using popups for the help page so you don't get redirected to the login page if you are logged in
+
+kevinL - 2019-10-25 18:45
+  - The latest update to stories are now shown on the /stories route
