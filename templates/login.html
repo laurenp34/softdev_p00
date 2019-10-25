@@ -6,11 +6,10 @@
   <body>
     {% set msgs = get_flashed_messages() %}
     {% for each in msgs %}
-      {{ each }}
+      <h4> {{ each }} </h4>
     {% endfor %}
 
     <a href=/static/help.html>Help/FAQ</a>
-    <p>(Just gonna stick this here for the time being)</p>
 
     {% block form %}
     <h3>Sign in to access this website</h3>

@@ -25,6 +25,7 @@ file.close()
 def home():
     if 'user' in session: #checks that a user is logged into a session, render welcome page
         print("Session username: " + session['user'])
+        flash ("You are currently logged in.")
         return render_template("welcome.html")
 
     return render_template("login.html") #if not, then render login page
@@ -38,16 +39,17 @@ def register():
     username = request.form.get('user')
     password = request.form.get('pw')
 
-    # keep working on this
-    # if not (username and password): 
-    #     flash("Username or Password cannot be empty.")
-    #     return redirect(url_for('register'))
+    if (len(username) == 0 or len(password) == 0):
+        flash("Your username or password cannot be empty.")
+        return redirect(url_for('signup'))
 
-    if (db_ops.accountExists(username)):
-        return "This username is already in use. Try another one."
+    elif (db_ops.accountExists(username)):
+        flash("This username is already in use. Try another one.")
+        return redirect(url_for('signup'))
 
     db_ops.addAccount(username, password)
-    return "Success!"
+    flash("You have successfully created your account. Please log in now.")
+    return redirect(url_for('home'))
 
 @app.route("/newstory", methods=['GET', 'POST'])
 def newStory():
@@ -61,16 +63,13 @@ def login():
     username = request.form.get('user')
     password = request.form.get('pw')
 
-    if not (username and password):
-            flash("Username or Password cannot be empty.")
-            return redirect(url_for('checkLogin'))
-
     if (db_ops.authenticate(username, password)):
-        return "You are logged in!"
+        flash("You are logged in!")
+        return render_template("welcome.html"); #landing page
 
-    return "Incorrect username or password."
+    flash("Failed to log in. The username or password provided did not match any accounts.");
+    return redirect(url_for('home'));
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
-

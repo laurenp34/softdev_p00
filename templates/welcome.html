@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Welcome</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Personal Page</title>
 </head>
 <body>
-  <h1> Welcome to the Noobpedia! </h1>
+  {% set msgs = get_flashed_messages() %}
+  {% for each in msgs %}
+    <h4> {{ each }} </h4>
+  {% endfor %}
+
+  <p>Welcome!</p>
 </body>
 </html>
