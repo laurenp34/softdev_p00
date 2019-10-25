@@ -23,11 +23,24 @@ file.close()
 
 @app.route("/")
 def home():
-    if 'user' in session: #checks that a user is logged into a session, render welcome page
+    if ('user' in session): #checks that a user is logged into a session, render welcome page)
         print("Session username: " + session['user'])
+        flash ("You are logged in.")
         return render_template("welcome.html")
 
     return render_template("login.html") #if not, then render login page
+
+@app.route("/auth", methods=['POST'])
+def login():
+    username = request.form.get('user')
+    password = request.form.get('pw')
+
+    if (db_ops.authenticate(username, password)):
+        session['user'] = username
+        return redirect(url_for('home'))
+
+    flash("Failed to log in. The username or password provided did not match any accounts.");
+    return redirect(url_for('home'));
 
 @app.route("/signup")
 def signup():
@@ -38,45 +51,36 @@ def register():
     username = request.form.get('user')
     password = request.form.get('pw')
 
-    # keep working on this
-    # if not (username and password): 
-    #     flash("Username or Password cannot be empty.")
-    #     return redirect(url_for('register'))
-
     if (db_ops.accountExists(username)):
-        return "This username is already in use. Try another one."
+        flash("This username is already in use. Try another one.")
+        return redirect(url_for('signup'))
 
     db_ops.addAccount(username, password)
-    return "Success!"
+    flash("You have successfully created your account. Please log in now.")
+    return redirect(url_for('home'))
 
-@app.route("/newstory", methods=['GET', 'POST'])
-def newStory():
-    if (session.get('user')): #checks that a user is logged into a session, render new story page
-        return render_template("newstory.html")
-    return render_template("newstory.html", error="Please log in first to create a new story.") # to check if user has logged in before letting them create a new story
+@app.route("/logout")
+def logout():
+    session.pop('user') #logs the user out of the session
+    flash("You have been logged out.")
+    return redirect(url_for('home'))
 
-@app.route("/auth", methods=['POST'])
-def login():
-    username = request.form.get('user')
-    password = request.form.get('pw')
+@app.route("/create")
+def create():
+    return render_template("newstory.html")
 
-    if not (username and password):
-            flash("Username or Password cannot be empty.")
-            return redirect(url_for('checkLogin'))
+#For the purposes of this program, considering the initial story as the first "update".
+@app.route("/addstory", methods=['POST'])
+def addStory():
+    title = request.form.get('title')
+    update = request.form.get('update')
 
-    if (db_ops.authenticate(username, password)):
-        return redirect(url_for('welcome'))
+    if (not db_ops.storyExists(title)):
+        db_ops.addStory(title, session['user'], update)
+        return "Story added to database, although you won't be able to access it via the website."
 
-    return "Incorrect username or password."
-    
-
-@app.route('/welcome/')
-def welcome():
-    if 'user' in session: #checks that a user is logged into a session, render new story page
-        return render_template("welcome.html")
-    return render_template("welcome.html") # MUST fix this tautology by properly querying user value in session
+    return "Story exists, tough luck."
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
-

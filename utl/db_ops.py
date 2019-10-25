@@ -18,14 +18,12 @@ def accountExists(user):
     for row in c:
         rowCount += 1
 
-    print(rowCount)
-
     #==========================================================
 
     db.commit() #save changes
     db.close()  #close database
 
-    if (rowCount > 0):
+    if (rowCount == 1):
         return True
 
     return False
@@ -48,7 +46,7 @@ def authenticate(user, pw):
     c = db.cursor()               #facilitate db ops
 
     #==========================================================
-    
+
     c.execute(
     """
         SELECT * FROM accounts WHERE username = (?)
@@ -63,13 +61,41 @@ def authenticate(user, pw):
 
         return pw == row[1]
 
-def addStory(title, creator):
+def storyExists(title):
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor()               #facilitate db ops
+
+    #==========================================================
+
+    c.execute(
+    """
+        SELECT * FROM stories WHERE title = (?)
+    """, (title,)
+    )
+
+    rowCount = 0
+    for row in c:
+        rowCount += 1
+
+    #==========================================================
+
+    db.commit() #save changes
+    db.close()  #close database
+
+    if (rowCount == 1):
+        return True
+
+    return False
+
+def addStory(title, creator, update):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops
 
     #==========================================================
 
     c.execute("INSERT INTO stories VALUES (?, ?)", (title, creator))
+
+    c.execute("INSERT INTO storyUpdates VALUES(?, ?, ?)", (title, update, creator))
 
     #==========================================================
 

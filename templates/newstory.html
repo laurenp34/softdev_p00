@@ -1,29 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Create New Story</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
-<body>
-    <!-- conditional below must work with method that checks login -->
-    {% if error %} 
-        <h1> {{ error }} </h1>
-    
-    {% else %}
-    <!-- should be action for form later -->
-    <form action="/storycreated" method="POST"> <!-- POST b/c arguments in the address bar is a bad idea -->
-        Story Title:
-        <br>
-        <input name="title" type="text">
-        <br><br>
-        Story content:
-        <br>
-        <textarea name="storycontent" rows="10" cols="100%"></textarea>
-        <br><br>
-        <input type="submit">
-    </form>
-    {% endif %}
+{% extends "welcome.html" %}
+
+{% block title %} <title>Create a story</title> {% endblock %}
+
+{% block content %}
+  <form action="/addstory" method="post">
+      <br>
+      Story Title (max 30 characters):
+      <br>
+      <input name="title" type="text" maxlength="30" required="required">
+      <br><br>
+      Story content (max 1000 characters):
+      <br>
+      <textarea name="update" rows="10" cols="100%" maxlength="1000" required="required"></textarea>
+      <br><br>
+      <input type="submit">
+  </form>
+{% endblock %}
+
 </body>
 </html>
