@@ -102,6 +102,27 @@ def addStory(title, creator, update):
     db.commit() #save changes
     db.close()  #close database
 
+def viewStory(title):
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor()               #facilitate db ops
+
+    #==========================================================
+
+    c.execute(
+    """
+        SELECT * FROM stories WHERE title = (?)
+    """, (title,)
+    )
+
+    for row in c:
+        print(row)
+
+    #==========================================================
+
+    db.commit() #save changes
+    db.close()  #close database
+
+    return row[0]
 
 def addStoryUpdate(title, textUpdate, user):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create

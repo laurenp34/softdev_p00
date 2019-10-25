@@ -26,7 +26,7 @@ def home():
     if ('user' in session): #checks that a user is logged into a session, render welcome page)
         print("Session username: " + session['user'])
         flash ("You are logged in.")
-        return render_template("welcome.html")
+        return render_template("welcome.html", title=db_ops.viewStory("Let it Go"))
 
     return render_template("login.html") #if not, then render login page
 
