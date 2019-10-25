@@ -117,3 +117,9 @@ emoryW - 2019-10-25 8:30
   - Made sure that database was updating correctly
   - Everything is looking good
   - Added a 'Back to Login' button
+
+kevinL - 2019-10-25 08:30
+  - Laid the groundwork for accessing stories continued to on the landing page
+
+kevinL - 2019-10-25 10:10
+  - Using popups for the help page so you don't redirected to the login page if you are logged in
