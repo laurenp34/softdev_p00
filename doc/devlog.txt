@@ -102,3 +102,12 @@ rayL - 2019-10-24 19:00
   - added a welcome page template
   - added a new story page template (checks for user login)
     - user not allowed to create a new story if they are not logged in, but for the purposes of development, comment out conditional that checks for user in session in order to see the new story template w/o restrictions
+
+kevinL - 2019-10-24 22:22
+  - Flash messages when appropriate and use redirect rather than re-rendering pages (thx for the indirect suggestion Ray)
+  - Simplified a lot of the logic due to discovering the fact that HTML input fields let you control whether you are required to have some text in it, max/min characters, etc.
+  - Establish session/Logout function
+  - POST everything (guys lmk if I should allow GET so that query strings are shown)
+  - /create route links to Ray's new story template
+  - Use jinja2 extend to minimize repetitiveness in HTML files
+  - After creating a story, it now gets added to the database. You are not allowed to create two stories of the same title. 
