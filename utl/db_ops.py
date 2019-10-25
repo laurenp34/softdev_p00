@@ -87,13 +87,15 @@ def storyExists(title):
 
     return False
 
-def addStory(title, creator):
+def addStory(title, creator, update):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops
 
     #==========================================================
 
     c.execute("INSERT INTO stories VALUES (?, ?)", (title, creator))
+
+    c.execute("INSERT INTO storyUpdates VALUES(?, ?, ?)", (title, update, creator))
 
     #==========================================================
 

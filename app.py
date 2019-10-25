@@ -69,13 +69,17 @@ def logout():
 def create():
     return render_template("newstory.html")
 
+#For the purposes of this program, considering the initial story as the first "update".
 @app.route("/addstory", methods=['POST'])
 def addStory():
     title = request.form.get('title')
-    content = request.form.get('update')
+    update = request.form.get('update')
 
+    if (not db_ops.storyExists(title)):
+        db_ops.addStory(title, session['user'], update)
+        return "Story added to database, although you won't be able to access it via the website."
 
-    return "PLACEHOLDER"
+    return "Story exists, tough luck."
 
 if __name__ == "__main__":
     app.debug = True
