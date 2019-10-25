@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Personal Page</title>
+  {% block title %} <title>Personal Page</title> {% endblock %}
 </head>
 <body>
   {% set msgs = get_flashed_messages() %}
@@ -9,8 +9,14 @@
     <h4> {{ each }} </h4>
   {% endfor %}
 
-  <p>Welcome!</p>
-  <a href="../logout"><input type="button" value="Logout"></a>
+  <a href="../"><input type="button" value="View homepage"></a>
   <a href=/static/help.html><input type="button" value="Help/FAQ"></a>
+  <a href="../create"><input type="button" value="Create a story"></a>
+  <a href="../logout"><input type="button" value="Logout"></a>
+  <br>
+
+  {% block content %}
+    <p>Welcome!</p>
+  {% endblock %}
 </body>
 </html>

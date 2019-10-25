@@ -69,6 +69,10 @@ def logout():
     flash("You have been logged out.")
     return redirect(url_for('home'))
 
+@app.route("/create")
+def create():
+    return render_template("newstory.html")
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
