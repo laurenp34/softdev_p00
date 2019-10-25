@@ -24,7 +24,7 @@ file.close()
 @app.route("/")
 def home():
     if ('user' in session): #checks that a user is logged into a session, render welcome page)
-        print("Session username: " + session['user'])
+        #print("Session username: " + session['user'])
         flash ("You are logged in.")
         return render_template("welcome.html", title=db_ops.viewStory("Let it Go"))
 
@@ -80,6 +80,12 @@ def addStory():
         return "Story added to database, although you won't be able to access it via the website."
 
     return "Story exists, tough luck."
+
+@app.route("/stories")
+def stories():
+    stories = db_ops.viewStories()
+    print(stories)
+    return render_template("stories.html", stories=stories)
 
 if __name__ == "__main__":
     app.debug = True
