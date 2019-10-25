@@ -23,7 +23,7 @@ file.close()
 
 @app.route("/")
 def home():
-    if 'user' in session: #checks that a user is logged into a session, render welcome page
+    if ('user' in session): #checks that a user is logged into a session, render welcome page)
         print("Session username: " + session['user'])
         flash ("You are currently logged in.")
         return render_template("welcome.html")
@@ -65,10 +65,17 @@ def login():
 
     if (db_ops.authenticate(username, password)):
         flash("You are logged in!")
+        session['user'] = username
         return render_template("welcome.html"); #landing page
 
     flash("Failed to log in. The username or password provided did not match any accounts.");
     return redirect(url_for('home'));
+
+@app.route("/logout")
+def logout():
+    session.pop('user') #logs the user out of the session
+    flash("You have been logged out.")
+    return redirect(url_for('home'))
 
 if __name__ == "__main__":
     app.debug = True
