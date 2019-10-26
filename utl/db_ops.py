@@ -85,38 +85,6 @@ def viewStories():
         )
 
         update = c.fetchone()
-        db.close()  #close database
-        arr = []
-        arr.append(str(update[0]))
-        arr.append(str(update[1]))
-        arr.append(str(update[2]))
-        latestUpdates.append(arr)
-
-    return latestUpdates
-
-def viewStoriesB():
-    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
-    c = db.cursor()               #facilitate db ops
-
-    #==========================================================
-
-    #Titles list to be used in next loop
-    titles = []
-    c.execute("SELECT * FROM stories")
-    for row in c:
-        titles.append(row[0])
-
-    latestUpdates = []
-    for title in titles:
-        c.execute(
-        """
-            SELECT * FROM storyUpdates
-            WHERE title = (?)
-            ORDER BY timestamp DESC
-        """, (title,)
-        )
-
-        update = c.fetchone()
         arr = []
         arr.append(str(update[0]))
         arr.append(str(update[1]))
@@ -125,6 +93,28 @@ def viewStoriesB():
 
     db.close()  #close database
     return latestUpdates
+
+def fetchContributedToStories(user):
+    db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
+    c = db.cursor()               #facilitate db ops
+
+    #==========================================================
+
+    #Contributed to list to be used in next loop
+    contributedTo = []
+    c.execute(
+    """
+        SELECT * FROM storyUpdates
+        WHERE user = (?)
+        GROUP BY title
+        ORDER BY title DESC
+    """, (user,)
+    )
+
+    for row in c:
+        contributedTo.append(row[0])
+
+    print(contributedTo)
 
 def storyExists(title):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
