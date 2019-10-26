@@ -63,61 +63,75 @@ def register():
 
 @app.route("/logout")
 def logout():
-    session.pop('user') #logs the user out of the session
-    flash("You have been logged out.")
-    return redirect(url_for('home'))
+    if ('user' in session): #checks that a user is logged into a session
+        session.pop('user') #logs the user out of the session
+        flash("You have been logged out.")
+        return redirect(url_for('home'))
+    flash("You are already logged out.")
+    return render_template("login.html")
 
 @app.route("/create")
 def create(): #text parameter is for if you fail to add a story, keeps the text already written
-    if 'text' in session:
-        prevText = session['text']
-        session.pop('text')
+    if ('user' in session): #checks that a user is logged into a session
+        if 'text' in session:
+            prevText = session['text']
+            session.pop('text')
 
-    else:
-        prevText = ""
+        else:
+            prevText = ""
 
-    return render_template("newstory.html", text = prevText)
+        return render_template("newstory.html", text = prevText)
+    return render_template("login.html")
 
 #For the purposes of this program, considering the initial story as the first "update".
 @app.route("/addstory", methods=['POST'])
 def addStory():
-    title = request.form.get('title')
-    update = request.form.get('update')
+    if ('user' in session): #checks that a user is logged into a session
+        title = request.form.get('title')
+        update = request.form.get('update')
 
-    if (not db_ops.storyExists(title)):
-        db_ops.addStory(title, session['user'], update)
-        flash("Story successfully created. You may now read the story in full on your homepage, but you will not be able to contribute to it anymore.")
-        return redirect(url_for('home'))
+        if (not db_ops.storyExists(title)):
+            db_ops.addStory(title, session['user'], update)
+            flash("Story successfully created. You may now read the story in full on your homepage, but you will not be able to contribute to it anymore.")
+            return redirect(url_for('home'))
 
-    flash("A story with this title already exists. Please try another title.")
-    session['text'] = update
-    return redirect(url_for('create'))
+        flash("A story with this title already exists. Please try another title.")
+        session['text'] = update
+        return redirect(url_for('create'))
+    flash("You must log in first before you can create a story!")
+    return render_template("login.html")
 
 @app.route("/addstoryupdate", methods=['POST'])
 def addStoryUpdate():
-    title = request.form.get('title')
-    update = request.form.get('update')
+    if ('user' in session): #checks that a user is logged into a session
+        title = request.form.get('title')
+        update = request.form.get('update')
 
-    db_ops.addStoryUpdate(title, update, session['user'])
-    flash("Story updated. You may now view the whole story on your homepage. However, your ability to access it will now be disabled.")
-    return redirect(url_for('home'))
+        db_ops.addStoryUpdate(title, update, session['user'])
+        flash("Story updated. You may now view the whole story on your homepage. However, your ability to access it will now be disabled.")
+        return redirect(url_for('home'))
+    return render_template("login.html")
 
 @app.route("/stories")
 def stories():
-    stories = db_ops.viewStories()
-    return render_template("stories.html", stories=stories)
+    if ('user' in session): #checks that a user is logged into a session
+        stories = db_ops.viewStories()
+        return render_template("stories.html", stories=stories)
+    return render_template("login.html")
 
 @app.route("/stories/<title>")
 def viewStory(title):
-    stories = db_ops.fetchContributedToStories(session['user']).items()
-    titles = []
-    for key, value in stories:
-        titles.append(key)
+    if ('user' in session): #checks that a user is logged into a session
+        stories = db_ops.fetchContributedToStories(session['user']).items()
+        titles = []
+        for key, value in stories:
+            titles.append(key)
 
-    if title in titles:
-        return render_template("editstory.html", title = title, canEdit = False, latestUpdate = db_ops.fetchLatestUpdate(title))
+        if title in titles:
+            return render_template("editstory.html", title = title, canEdit = False, latestUpdate = db_ops.fetchLatestUpdate(title))
 
-    return render_template("editstory.html", title = title, canEdit = True, latestUpdate = db_ops.fetchLatestUpdate(title))
+        return render_template("editstory.html", title = title, canEdit = True, latestUpdate = db_ops.fetchLatestUpdate(title))
+    return render_template("login.html")   
 
 if __name__ == "__main__":
     app.debug = True
