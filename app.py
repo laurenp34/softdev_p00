@@ -81,6 +81,7 @@ def create(): #text parameter is for if you fail to add a story, keeps the text 
             prevText = ""
 
         return render_template("newstory.html", text = prevText)
+    flash("You must log in first before you can create a story!")
     return render_template("login.html")
 
 #For the purposes of this program, considering the initial story as the first "update".
@@ -98,7 +99,7 @@ def addStory():
         flash("A story with this title already exists. Please try another title.")
         session['text'] = update
         return redirect(url_for('create'))
-    flash("You must log in first before you can create a story!")
+    flash("You must log in first before you can add a story!")
     return render_template("login.html")
 
 @app.route("/addstoryupdate", methods=['POST'])
@@ -110,6 +111,7 @@ def addStoryUpdate():
         db_ops.addStoryUpdate(title, update, session['user'])
         flash("Story updated. You may now view the whole story on your homepage. However, your ability to access it will now be disabled.")
         return redirect(url_for('home'))
+    flash("You must log in first before you can add a story update!")
     return render_template("login.html")
 
 @app.route("/stories")
@@ -117,6 +119,7 @@ def stories():
     if ('user' in session): #checks that a user is logged into a session
         stories = db_ops.viewStories()
         return render_template("stories.html", stories=stories)
+    flash("You must log in first before you can view the stories!")
     return render_template("login.html")
 
 @app.route("/stories/<title>")
@@ -131,6 +134,7 @@ def viewStory(title):
             return render_template("editstory.html", title = title, canEdit = False, latestUpdate = db_ops.fetchLatestUpdate(title))
 
         return render_template("editstory.html", title = title, canEdit = True, latestUpdate = db_ops.fetchLatestUpdate(title))
+    flash("You must log in first before you can view this story!")
     return render_template("login.html")   
 
 if __name__ == "__main__":
