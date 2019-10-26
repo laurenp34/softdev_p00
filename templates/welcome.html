@@ -24,6 +24,20 @@
         <th align="left">Creator</th>
         <th align="left">Content</th>
       </tr>
+      {% for title, story in stories %}
+        <tr>
+          <td align="left"> {{ title }} </td>
+          <td align="left"> CREATOR PLACEHOLDER </td>
+
+          <td align="left">
+            {% for update in story %}
+              {{ update }}
+              <br>
+              <br>
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
     </table>
   {% endblock %}
 </body>

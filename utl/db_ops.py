@@ -100,8 +100,8 @@ def fetchContributedToStories(user):
 
     #==========================================================
 
-    #Contributed to list to be used in next loop
-    contributedTo = []
+    #Stories contributed to list to be used in next loop
+    titles = []
     c.execute(
     """
         SELECT * FROM storyUpdates
@@ -112,9 +112,27 @@ def fetchContributedToStories(user):
     )
 
     for row in c:
-        contributedTo.append(row[0])
+        titles.append(str(row[0]))
 
-    print(contributedTo)
+    stories = {}
+    for title in titles:
+        c.execute(
+        """
+            SELECT * FROM storyUpdates
+            WHERE title = (?)
+            AND user = (?)
+            ORDER BY timestamp ASC
+        """, (title, user)
+        )
+
+        updates = []
+        for update in c:
+            updates.append(str(update[1]))
+
+        stories[title] = updates
+
+    db.close()  #close database
+    return stories
 
 def storyExists(title):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create

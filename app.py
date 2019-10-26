@@ -6,8 +6,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os #for generating a secret key
 from utl import db_ops
+from jinja2 import Environment
 
 app = Flask(__name__)
+TEMPLATE_ENVIRONMENT = Environment(
+    keep_trailing_newline=True
+)
 
 #Secret key handling
 secret_key_file = 'secret_key.txt'
@@ -26,8 +30,8 @@ def home():
     if ('user' in session): #checks that a user is logged into a session, render welcome page)
         #print("Session username: " + session['user'])
         flash ("You are logged in.")
-        db_ops.fetchContributedToStories(session['user'])
-        return render_template("welcome.html", title=db_ops.viewStory("Let it Go"))
+        stories = db_ops.fetchContributedToStories(session['user'])
+        return render_template("welcome.html", stories=stories.items())
 
     return render_template("login.html") #if not, then render login page
 
