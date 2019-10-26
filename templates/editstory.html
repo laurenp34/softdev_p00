@@ -3,18 +3,21 @@
 {% block title %} <title> {{ title }} </title> {% endblock %}
 
 {% block content %}
-  <form action="/addStoryUpdate" method="post">
-      <br>
+  <h4> Latest update by {{ latestUpdate[2] }} </h4>
+  {{ latestUpdate[1] }}
+  <hr>
+  <form action="/addstoryupdate" method="post">
       Story update (max 200 characters):
       <br>
 
       {% if canEdit %}
         <textarea name="update" rows="3" cols="90%" maxlength="200" required="required"></textarea>
+        <input type="hidden" name="title" value= {{ title }} />
         <br><br>
         <input type="submit">
       {% else %}
         <textarea name="update" rows="3" cols="90%" maxlength="200" required="required" disabled></textarea>
-        <br><br>
+        <br>
         <p>You have already edited this story. Try another one.</p>
       {% endif %}
   </form>
