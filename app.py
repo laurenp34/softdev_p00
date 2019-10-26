@@ -71,8 +71,15 @@ def logout():
     return redirect(url_for('home'))
 
 @app.route("/create")
-def create():
-    return render_template("newstory.html")
+def create(): #text parameter is for if you fail to add a story, keeps the text already written
+    if 'text' in session:
+        prevText = session['text']
+        session.pop('text')
+
+    else:
+        prevText = ""
+
+    return render_template("newstory.html", text = prevText)
 
 #For the purposes of this program, considering the initial story as the first "update".
 @app.route("/addstory", methods=['POST'])
@@ -82,9 +89,12 @@ def addStory():
 
     if (not db_ops.storyExists(title)):
         db_ops.addStory(title, session['user'], update)
-        return "Story added to database, although you won't be able to access it via the website."
+        flash("Story successfully created. You may now read the story in full on your homepage, but you will not be able to contribute to it anymore.")
+        return redirect(url_for('home'))
 
-    return "Story exists, tough luck."
+    flash("A story with this title already exists. Please try another title.")
+    session['text'] = update
+    return redirect(url_for('create'))
 
 @app.route("/addstoryupdate", methods=['POST'])
 def addStoryUpdate():
@@ -101,7 +111,7 @@ def stories():
     return render_template("stories.html", stories=stories)
 
 @app.route("/stories/<title>")
-def editStory(title):
+def viewStory(title):
     stories = db_ops.fetchContributedToStories(session['user']).items()
     titles = []
     for key, value in stories:

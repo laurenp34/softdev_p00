@@ -21,18 +21,14 @@
     <table border="1">
       <tr>
         <th align="left">Title</th>
-        <th align="left">Creator</th>
         <th align="left">Content</th>
       </tr>
       {% for title, story in stories %}
         <tr>
           <td align="left"> <a href="../stories/{{ title }}"> {{ title }} </a> </td>
-          <td align="left"> CREATOR PLACEHOLDER </td>
-
           <td align="left">
             {% for update in story %}
               {{ update }}
-              <br>
               <br>
             {% endfor %}
           </td>

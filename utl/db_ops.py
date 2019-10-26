@@ -120,9 +120,8 @@ def fetchContributedToStories(user):
         """
             SELECT * FROM storyUpdates
             WHERE title = (?)
-            AND user = (?)
             ORDER BY timestamp ASC
-        """, (title, user)
+        """, (title,)
         )
 
         updates = []
@@ -180,7 +179,7 @@ def addStoryUpdate(title, addition, user):
 
     #==========================================================
 
-    c.execute("INSERT INTO storyUpdates VALUES (?, ?, ?)", (title, addition, user))
+    c.execute("INSERT INTO storyUpdates VALUES (?, ?, ?, ?)", (title, addition, user, datetime.now()))
 
     #==========================================================
 
