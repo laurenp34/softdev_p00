@@ -126,7 +126,7 @@ kevinL - 2019-10-25 10:10
 
 kevinL - 2019-10-25 18:45
   - The latest update to stories are now shown on the /stories route
-  
+
 kevinL - 2019-10-25 22:54
   - Stories a user has contributed to will now show on their homepage.
 
@@ -137,10 +137,15 @@ kevinL - 2019-10-26 11:24
 
 kevinL - 2019-10-26 11:55
   - Design doc v2
-    - Updated site map to be more accurate to the actual site 
-    - Use more correct terminology 
+    - Updated site map to be more accurate to the actual site
+    - Use more correct terminology
     - Clarify that when loading up the site for the first time, you should be on the login page.
     - Include all elements of the top menu of the site
     - Clarify that stories that a user has contributed to will be shown IN FULL, not just the latest update.
     - Get rid of stuff like NOT NULL and PRIMARY KEY, didn't come into play for this project
-    - Change the site flat out barring you from viewing a story you've contributed to on the stories page - you can view it, you just can't add to it as the text area is grayed out. 
+    - Change the site flat out barring you from viewing a story you've contributed to on the stories page - you can view it, you just can't add to it as the text area is grayed out.
+
+emoryW - 2019-10-26
+  - Fixed back button on help
+  - Made another testing account to check on stories again
+  - Everything looks great super happy with our progress!
