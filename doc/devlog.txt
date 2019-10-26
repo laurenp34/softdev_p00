@@ -158,8 +158,13 @@ rayL - 2019-10-26 15:03
 rayL - 2019-10-26 15:20
   -added more concise flash messages when logged out user is trying to access different routes
 
-rayL - 2019-10-26 18:22
+rayL - 2019-10-26 16:32
   -added a search feature using levenshtein distance to ease the UX given a lot of stories
+  -BUGS: searchvalue in stories.html cannot be accessed in app.py; prints a Nonetype when trying to print searchvalue
+
+rayL - 2019-10-26 18:22
+  -added a WORKING search feature using levenshtein distance to ease the UX given a lot of stories
+  -fixed previous bug by converting the method to POST, instead of GET, even though seeing the searchvalues as part of the URL would be optimal
   
 rayL - 2019-10-26 18:42
   -removed the maxlength restriction on the title and story content of newstory.html
