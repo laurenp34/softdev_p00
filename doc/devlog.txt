@@ -129,3 +129,8 @@ kevinL - 2019-10-25 18:45
   
 kevinL - 2019-10-25 22:54
   - Stories a user has contributed to will now show on their homepage.
+
+kevinL - 2019-10-26 11:24
+  - Logic handling whether or not you can edit a story
+  - Show latest update on individual story page
+  - Utilize session data to keep text written for a story if you fail to create one
