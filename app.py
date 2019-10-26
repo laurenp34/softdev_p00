@@ -84,7 +84,6 @@ def addStory():
 @app.route("/stories")
 def stories():
     stories = db_ops.viewStories()
-    print(stories)
     return render_template("stories.html", stories=stories)
 
 if __name__ == "__main__":
