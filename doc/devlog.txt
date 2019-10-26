@@ -149,3 +149,8 @@ emoryW - 2019-10-26
   - Took out back button on help page because it creates new tab
   - Made another testing account to check on stories again
   - Everything looks great super happy with our progress!
+
+rayL - 2019-10-26 15:03
+  -fixed syntax within app.py
+  -made login conditionals for /create /addstory /addstoryupdate /stories and /stories/<title> to make it less exploitable
+  -users cannot log out if they are not in session
