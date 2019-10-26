@@ -86,22 +86,31 @@ def addStory():
 
     return "Story exists, tough luck."
 
+@app.route("/addstoryupdate", methods=['POST'])
+def addStoryUpdate():
+    title = request.form.get('title')
+    update = request.form.get('update')
+
+    db_ops.addStoryUpdate(title, update, session['user'])
+    flash("Story updated. You may now view the whole story on your homepage. However, your ability to access it will now be disabled.")
+    return redirect(url_for('home'))
+
 @app.route("/stories")
 def stories():
     stories = db_ops.viewStories()
     return render_template("stories.html", stories=stories)
 
 @app.route("/stories/<title>")
-def viewStory(title):
+def editStory(title):
     stories = db_ops.fetchContributedToStories(session['user']).items()
     titles = []
-    for title, story in stories:
-        titles.append(title)
+    for key, value in stories:
+        titles.append(key)
 
     if title in titles:
-        return render_template("editstory.html", title = title, canEdit = False)
+        return render_template("editstory.html", title = title, canEdit = False, latestUpdate = db_ops.fetchLatestUpdate(title))
 
-    return render_template("editstory.html", title = title, canEdit = True)
+    return render_template("editstory.html", title = title, canEdit = True, latestUpdate = db_ops.fetchLatestUpdate(title))
 
 if __name__ == "__main__":
     app.debug = True
