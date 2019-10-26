@@ -213,10 +213,12 @@ def searchStories(searchValue):
     for el in stories:
         levenshteinDistances[editDistDP(str(searchValue), str(el[0]))] = el
         print(el[0] + ": " + str(editDistDP(str(searchValue), str(el[0]))))
-    levenshteinDistances = {k: levenshteinDistances[k] for k in sorted(levenshteinDistances)}
+    sortedStories = [value for (key, value) in sorted(levenshteinDistances.items())]
     #sortedBySearchTitles = [value for (key, value) in sorted(levenshteinDistances.items())]
-    print(levenshteinDistances)
-    return levenshteinDistances.values()
+    # print(sortedStories)
+    # print(levenshteinDistances)
+    # print(searchValue)
+    return sortedStories
     
 # dynamic programming implementation of edit distance
 def editDistDP(str1, str2): 

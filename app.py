@@ -143,11 +143,12 @@ def viewStory(title):
     flash("You must log in first before you can view this story!")
     return redirect(url_for('home'))
 
-@app.route("/search")
+@app.route("/search", methods=['POST'])
 def search():
     if ('user' in session): #checks that a user is logged into a session
         searchvalue = request.form.get('searchvalue')
-        sortedStories = db_ops.searchStories(searchvalue) # titles sorted based on least to greatest edit distance
+        #print("search value: " + searchvalue)
+        sortedStories = db_ops.searchStories(str(searchvalue)) # titles sorted based on least to greatest edit distance
         return render_template("search.html", sortedStories = sortedStories)
     flash("You must log in first before you can search the stories!")
     return render_template("login.html")
