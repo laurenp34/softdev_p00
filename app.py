@@ -9,9 +9,6 @@ from utl import db_ops
 from jinja2 import Environment
 
 app = Flask(__name__)
-TEMPLATE_ENVIRONMENT = Environment(
-    keep_trailing_newline=True
-)
 
 #Secret key handling
 secret_key_file = 'secret_key.txt'
