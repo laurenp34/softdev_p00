@@ -58,9 +58,9 @@ def authenticate(user, pw):
         db.close()
         rowCount += 1
         if (rowCount != 1):
-            return False
+            return False;
 
-        return pw == row[1]
+        return pw == row[1];
 
 def viewStories():
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
@@ -187,7 +187,7 @@ def addStoryUpdate(title, addition, user):
     db.commit() #save changes
     db.close()  #close database
 
-def viewStory(title):
+def fetchLatestUpdate(title):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops
 
@@ -195,12 +195,12 @@ def viewStory(title):
 
     c.execute(
     """
-        SELECT * FROM stories WHERE title = (?)
+        SELECT * FROM storyUpdates
+        WHERE title = (?)
+        ORDER BY timestamp DESC
     """, (title,)
     )
 
-    #==========================================================
-
+    update = c.fetchone()
     db.close()  #close database
-
-    return "a"
+    return update
