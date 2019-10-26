@@ -91,6 +91,18 @@ def stories():
     stories = db_ops.viewStories()
     return render_template("stories.html", stories=stories)
 
+@app.route("/stories/<title>")
+def viewStory(title):
+    stories = db_ops.fetchContributedToStories(session['user']).items()
+    titles = []
+    for title, story in stories:
+        titles.append(title)
+
+    if title in titles:
+        return render_template("editstory.html", title = title, canEdit = False)
+
+    return render_template("editstory.html", title = title, canEdit = True)
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
