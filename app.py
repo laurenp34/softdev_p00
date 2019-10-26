@@ -23,10 +23,10 @@ file.close()
 
 @app.route("/")
 def home():
-    if ('user' in session): #checks that a user is logged into a session, render welcome page)
+    if 'user' in session: #checks that a user is logged into a session, render welcome page
         #print("Session username: " + session['user'])
         flash ("You are logged in.")
-        stories = db_ops.fetchContributedToStories(session['user'])
+        stories = db_ops.fetchContributedToStories(session['user']) #method returned dictionary
         return render_template("welcome.html", stories=stories.items())
 
     return render_template("login.html") #if not, then render login page
@@ -38,7 +38,7 @@ def login():
 
     if (db_ops.authenticate(username, password)):
         session['user'] = username
-        return redirect(url_for('home'))
+        return redirect(url_for('home')) #should trigger if statement in "/" route
 
     flash("Failed to log in. The username or password provided did not match any accounts.");
     return redirect(url_for('home'));
@@ -62,15 +62,16 @@ def register():
 
 @app.route("/logout")
 def logout():
-    if ('user' in session): #checks that a user is logged into a session
+    if 'user' in session: #checks that a user is logged into a session
         session.pop('user') #logs the user out of the session
         flash("You have been logged out.")
         return redirect(url_for('home'))
+
     flash("You are already logged out.")
-    return render_template("login.html")
+    return redirect(url_for('home'))
 
 @app.route("/create")
-def create(): #text parameter is for if you fail to add a story, keeps the text already written
+def create():
     if ('user' in session): #checks that a user is logged into a session
         if 'text' in session:
             prevText = session['text']
@@ -80,8 +81,9 @@ def create(): #text parameter is for if you fail to add a story, keeps the text 
             prevText = ""
 
         return render_template("newstory.html", text = prevText)
+
     flash("You must log in first before you can create a story!")
-    return render_template("login.html")
+    return redirect(url_for('home'))
 
 #For the purposes of this program, considering the initial story as the first "update".
 @app.route("/addstory", methods=['POST'])
@@ -93,48 +95,53 @@ def addStory():
         if (not db_ops.storyExists(title)):
             db_ops.addStory(title, session['user'], update)
             flash("Story successfully created. You may now read the story in full on your homepage, but you will not be able to contribute to it anymore.")
-            return redirect(url_for('home'))
+            return redirect(url_for('home')) #should redirect to your homepage
 
         flash("A story with this title already exists. Please try another title.")
-        session['text'] = update
+        session['text'] = update #save the text so you don't "lose your progress"
         return redirect(url_for('create'))
+
     flash("You must log in first before you can add a story!")
-    return render_template("login.html")
+    return redirect(url_for('home'))
 
 @app.route("/addstoryupdate", methods=['POST'])
 def addStoryUpdate():
-    if ('user' in session): #checks that a user is logged into a session
+    if 'user' in session: #checks that a user is logged into a session
         title = request.form.get('title')
         update = request.form.get('update')
 
         db_ops.addStoryUpdate(title, update, session['user'])
         flash("Story updated. You may now view the whole story on your homepage. However, your ability to access it will now be disabled.")
         return redirect(url_for('home'))
+
     flash("You must log in first before you can add a story update!")
-    return render_template("login.html")
+    return redirect(url_for('home'))
 
 @app.route("/stories")
 def stories():
-    if ('user' in session): #checks that a user is logged into a session
-        stories = db_ops.viewStories()
+    if 'user' in session: #checks that a user is logged into a session
+        stories = db_ops.viewStories() #method returns list of updates to a story, each update consisting of the title, content, and author.
         return render_template("stories.html", stories=stories)
+
     flash("You must log in first before you can view the stories!")
-    return render_template("login.html")
+    return redirect(url_for('home'))
 
 @app.route("/stories/<title>")
 def viewStory(title):
     if ('user' in session): #checks that a user is logged into a session
+        #Just a way to check if a user has contributed to the story before, not very efficient
         stories = db_ops.fetchContributedToStories(session['user']).items()
         titles = []
         for key, value in stories:
-            titles.append(key)
+            titles.append(key) #the key is the title, just don't want it to conflict with the title argument of this method
 
         if title in titles:
             return render_template("editstory.html", title = title, canEdit = False, latestUpdate = db_ops.fetchLatestUpdate(title))
 
         return render_template("editstory.html", title = title, canEdit = True, latestUpdate = db_ops.fetchLatestUpdate(title))
+
     flash("You must log in first before you can view this story!")
-    return render_template("login.html")   
+    return redirect(url_for('home'))
 
 @app.route("/search")
 def search():

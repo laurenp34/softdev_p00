@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import datetime
+from datetime import datetime #for timestamp - that will be how story updates are sorted.
 
 DB_FILE = "discobandit.db"
 
@@ -55,7 +55,7 @@ def authenticate(user, pw):
 
     rowCount = 0
     for row in c:
-        db.close()
+        db.close() #only one iteration should happen anyway so I can close it right now
         rowCount += 1
         if (rowCount != 1):
             return False
@@ -68,7 +68,7 @@ def viewStories():
 
     #==========================================================
 
-    #Titles list to be used in next loop
+    #Gets a list of titles; to be used in next loop
     titles = []
     c.execute("SELECT * FROM stories")
     for row in c:
@@ -84,15 +84,15 @@ def viewStories():
         """, (title,)
         )
 
-        update = c.fetchone()
+        update = c.fetchone() #fetches the latest update of this specific story (possible because c is ordered by timestamp in descending order)
         arr = []
-        arr.append(str(update[0]))
-        arr.append(str(update[1]))
-        arr.append(str(update[2]))
-        latestUpdates.append(arr)
+        arr.append(str(update[0])) #title
+        arr.append(str(update[1])) #content
+        arr.append(str(update[2])) #author
+        latestUpdates.append(arr) #yes, that's a 2D list
 
     db.close()  #close database
-    return latestUpdates
+    return latestUpdates #returns a 2D list
 
 def fetchContributedToStories(user):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
@@ -100,7 +100,7 @@ def fetchContributedToStories(user):
 
     #==========================================================
 
-    #Stories contributed to list to be used in next loop
+    #Gets a list of titles, or stories contributed to; to be used in next loop
     titles = []
     c.execute(
     """
@@ -112,7 +112,7 @@ def fetchContributedToStories(user):
     )
 
     for row in c:
-        titles.append(str(row[0]))
+        titles.append(str(row[0])) #title
 
     stories = {}
     for title in titles:
@@ -122,16 +122,16 @@ def fetchContributedToStories(user):
             WHERE title = (?)
             ORDER BY timestamp ASC
         """, (title,)
-        )
+        ) #We actually want the earlier updates to be in front, so c is ordered by timestamp but in ascending order this time.
 
-        updates = []
+        updates = [] #array of updates for a story
         for update in c:
-            updates.append(str(update[1]))
+            updates.append(str(update[1])) #content
 
-        stories[title] = updates
+        stories[title] = updates #key: title, value: updates array
 
     db.close()  #close database
-    return stories
+    return stories #returns a dictionary
 
 def storyExists(title):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
@@ -166,7 +166,8 @@ def addStory(title, creator, update):
 
     c.execute("INSERT INTO stories VALUES (?, ?)", (title, creator))
 
-    c.execute("INSERT INTO storyUpdates VALUES(?, ?, ?, ?)", (title, update, creator, datetime.now()))
+    #Counting the initial creation of a story as the first "update"
+    c.execute("INSERT INTO storyUpdates VALUES(?, ?, ?, ?)", (title, update, creator, datetime.now())) #datetime.now --> timestamp
 
     #==========================================================
 
@@ -186,6 +187,7 @@ def addStoryUpdate(title, addition, user):
     db.commit() #save changes
     db.close()  #close database
 
+#For the stories page and when editing a story
 def fetchLatestUpdate(title):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops
@@ -200,7 +202,7 @@ def fetchLatestUpdate(title):
     """, (title,)
     )
 
-    update = c.fetchone()
+    update = c.fetchone() #fetch the latest update in c
     db.close()  #close database
     return update
 
