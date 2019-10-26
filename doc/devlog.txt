@@ -134,3 +134,13 @@ kevinL - 2019-10-26 11:24
   - Logic handling whether or not you can edit a story
   - Show latest update on individual story page
   - Utilize session data to keep text written for a story if you fail to create one
+
+kevinL - 2019-10-26 11:55
+  - Design doc v2
+    - Updated site map to be more accurate to the actual site 
+    - Use more correct terminology 
+    - Clarify that when loading up the site for the first time, you should be on the login page.
+    - Include all elements of the top menu of the site
+    - Clarify that stories that a user has contributed to will be shown IN FULL, not just the latest update.
+    - Get rid of stuff like NOT NULL and PRIMARY KEY, didn't come into play for this project
+    - Change the site flat out barring you from viewing a story you've contributed to on the stories page - you can view it, you just can't add to it as the text area is grayed out. 
