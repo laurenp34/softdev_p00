@@ -154,3 +154,6 @@ rayL - 2019-10-26 15:03
   -fixed syntax within app.py
   -made login conditionals for /create /addstory /addstoryupdate /stories and /stories/<title> to make it less exploitable
   -users cannot log out if they are not in session
+  
+rayL - 2019-10-26 15:20
+  -added more concise flash messages when logged out user is trying to access different routes
