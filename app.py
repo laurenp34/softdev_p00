@@ -6,7 +6,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os #for generating a secret key
 from utl import db_ops
-from jinja2 import Environment
 
 app = Flask(__name__)
 
