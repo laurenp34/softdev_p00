@@ -146,6 +146,6 @@ kevinL - 2019-10-26 11:55
     - Change the site flat out barring you from viewing a story you've contributed to on the stories page - you can view it, you just can't add to it as the text area is grayed out.
 
 emoryW - 2019-10-26
-  - Fixed back button on help
+  - Took out back button on help page because it creates new tab
   - Made another testing account to check on stories again
   - Everything looks great super happy with our progress!
