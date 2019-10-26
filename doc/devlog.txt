@@ -126,3 +126,6 @@ kevinL - 2019-10-25 10:10
 
 kevinL - 2019-10-25 18:45
   - The latest update to stories are now shown on the /stories route
+  
+kevinL - 2019-10-25 22:54
+  - Stories a user has contributed to will now show on their homepage.
