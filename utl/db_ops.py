@@ -58,9 +58,9 @@ def authenticate(user, pw):
         db.close()
         rowCount += 1
         if (rowCount != 1):
-            return False;
+            return False
 
-        return pw == row[1];
+        return pw == row[1]
 
 def viewStories():
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
