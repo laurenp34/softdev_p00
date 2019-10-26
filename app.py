@@ -6,8 +6,12 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import os #for generating a secret key
 from utl import db_ops
+from jinja2 import Environment
 
 app = Flask(__name__)
+TEMPLATE_ENVIRONMENT = Environment(
+    keep_trailing_newline=True
+)
 
 #Secret key handling
 secret_key_file = 'secret_key.txt'
@@ -24,9 +28,10 @@ file.close()
 @app.route("/")
 def home():
     if ('user' in session): #checks that a user is logged into a session, render welcome page)
-        print("Session username: " + session['user'])
+        #print("Session username: " + session['user'])
         flash ("You are logged in.")
-        return render_template("welcome.html")
+        stories = db_ops.fetchContributedToStories(session['user'])
+        return render_template("welcome.html", stories=stories.items())
 
     return render_template("login.html") #if not, then render login page
 
@@ -80,6 +85,23 @@ def addStory():
         return "Story added to database, although you won't be able to access it via the website."
 
     return "Story exists, tough luck."
+
+@app.route("/stories")
+def stories():
+    stories = db_ops.viewStories()
+    return render_template("stories.html", stories=stories)
+
+@app.route("/stories/<title>")
+def viewStory(title):
+    stories = db_ops.fetchContributedToStories(session['user']).items()
+    titles = []
+    for title, story in stories:
+        titles.append(title)
+
+    if title in titles:
+        return render_template("editstory.html", title = title, canEdit = False)
+
+    return render_template("editstory.html", title = title, canEdit = True)
 
 if __name__ == "__main__":
     app.debug = True
