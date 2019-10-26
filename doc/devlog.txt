@@ -158,5 +158,8 @@ rayL - 2019-10-26 15:03
 rayL - 2019-10-26 15:20
   -added more concise flash messages when logged out user is trying to access different routes
 
-rayL = 2019-10-26 18:22
+rayL - 2019-10-26 18:22
   -added a search feature using levenshtein distance to ease the UX given a lot of stories
+  
+rayL - 2019-10-26 18:42
+  -removed the maxlength restriction on the title and story content of newstory.html
