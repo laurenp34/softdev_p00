@@ -211,8 +211,8 @@ def searchStories(searchValue):
     # compare each title with search value and sort by edit distance
     levenshteinDistances = {}
     for el in stories:
-        levenshteinDistances[editDistDP(str(searchValue), str(el[0]))] = el
-        print(el[0] + ": " + str(editDistDP(str(searchValue), str(el[0]))))
+        levenshteinDistances[levenshteinDist(str(searchValue), str(el[0]))] = el
+        print(el[0] + ": " + str(levenshteinDist(str(searchValue), str(el[0]))))
     sortedStories = [value for (key, value) in sorted(levenshteinDistances.items())]
     #sortedBySearchTitles = [value for (key, value) in sorted(levenshteinDistances.items())]
     # print(sortedStories)
@@ -221,7 +221,7 @@ def searchStories(searchValue):
     return sortedStories
     
 # dynamic programming implementation of edit distance
-def editDistDP(str1, str2): 
+def levenshteinDist(str1, str2): 
     m = len(str1)
     n = len(str2)
     # 2d array (m by n matrix) to store subproblems 
