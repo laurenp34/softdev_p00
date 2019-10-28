@@ -9,6 +9,7 @@
 		- Word limit
 		- Log the fact that a user edited this
 		- Add story to user's landing page
+  - If time allows: a searching mechanism using edit distance that compares the search value with every existing title and orders them from least to greatest distance.
 
 - Kevin Li
 	- Implementing routes
