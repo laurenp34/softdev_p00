@@ -177,3 +177,4 @@ rayL - 2019-10-28 09:48
 
 rayL - 2019-10-28 19:34
   -added more comments to each function/route in app.py and db_ops.py
+  -updated design.pdf
