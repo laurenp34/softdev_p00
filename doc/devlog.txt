@@ -169,5 +169,8 @@ rayL - 2019-10-26 18:22
 rayL - 2019-10-26 18:42
   -removed the maxlength restriction on the title and story content of newstory.html
 
-rayL - 2019=10=26 18:48
+rayL - 2019-10-26 18:48
   -added a filler story "Wings of Freedom"
+
+rayL - 2019-10-28 09:48
+  -removed the newstory title and content restrictions
