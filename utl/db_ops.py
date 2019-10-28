@@ -28,6 +28,7 @@ def accountExists(user):
 
     return False
 
+# function to takes in a username and password and creates a new user entry
 def addAccount(user, pw):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops
@@ -41,6 +42,7 @@ def addAccount(user, pw):
     db.commit() #save changes
     db.close()  #close database
 
+# function that authenticates the username and password arguments to verify that the account exists
 def authenticate(user, pw):
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops
@@ -62,6 +64,7 @@ def authenticate(user, pw):
 
         return pw == row[1]
 
+# function that returns a 2d array of stories, with each subarray containing the title, content, and author
 def viewStories():
     db = sqlite3.connect(DB_FILE) #open if file exists, otherwise create
     c = db.cursor()               #facilitate db ops

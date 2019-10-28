@@ -21,6 +21,7 @@ else: #not adding the secret key file, so generate one on the spot for ppl witho
 
 file.close()
 
+# if logged in: welcome page, else login page
 @app.route("/")
 def home():
     if 'user' in session: #checks that a user is logged into a session, render welcome page
@@ -31,6 +32,7 @@ def home():
 
     return render_template("login.html") #if not, then render login page
 
+# login page
 @app.route("/auth", methods=['POST'])
 def login():
     username = request.form.get('user')
@@ -43,10 +45,12 @@ def login():
     flash("Failed to log in. The username or password provided did not match any accounts.");
     return redirect(url_for('home'));
 
+# signup route redirects to the register page template
 @app.route("/signup")
 def signup():
     return render_template("register.html")
 
+# register for a new account page
 @app.route("/register", methods=['POST'])
 def register():
     username = request.form.get('user')
@@ -60,6 +64,7 @@ def register():
     flash("You have successfully created your account. Please log in now.")
     return redirect(url_for('home'))
 
+# logout page
 @app.route("/logout")
 def logout():
     if 'user' in session: #checks that a user is logged into a session
@@ -70,6 +75,7 @@ def logout():
     flash("You are already logged out.")
     return redirect(url_for('home'))
 
+#create a new story page
 @app.route("/create")
 def create():
     if ('user' in session): #checks that a user is logged into a session
@@ -104,6 +110,7 @@ def addStory():
     flash("You must log in first before you can add a story!")
     return redirect(url_for('home'))
 
+# add story update page
 @app.route("/addstoryupdate", methods=['POST'])
 def addStoryUpdate():
     if 'user' in session: #checks that a user is logged into a session
@@ -117,6 +124,7 @@ def addStoryUpdate():
     flash("You must log in first before you can add a story update!")
     return redirect(url_for('home'))
 
+# stories page
 @app.route("/stories")
 def stories():
     if 'user' in session: #checks that a user is logged into a session
@@ -126,6 +134,7 @@ def stories():
     flash("You must log in first before you can view the stories!")
     return redirect(url_for('home'))
 
+# a story instance page
 @app.route("/stories/<title>")
 def viewStory(title):
     if ('user' in session): #checks that a user is logged into a session
