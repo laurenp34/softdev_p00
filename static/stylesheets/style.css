@@ -1,0 +1,17 @@
+body {
+  background-image: url('sand.jpg');
+}
+
+h1 {
+  border: 2px solid Tomato;
+  background-color:green;
+  text-align:center;
+}
+
+p{
+   color:brown;
+ }
+
+ table {
+
+ }
